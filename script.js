@@ -1,16 +1,27 @@
 function sendMessage() {
-    let userInput = document.getElementById("user-input").value;
-    let chatBox = document.getElementById("chat-box");
+    const userInput = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+    
+    if (userInput.value.trim() === "") return;
 
-    if (userInput.trim() === "") return;
+    // Add user message
+    const userMessage = document.createElement("div");
+    userMessage.className = "message user";
+    userMessage.textContent = userInput.value;
+    chatBox.appendChild(userMessage);
 
-    let userMessage = `<div><strong>You:</strong> ${userInput}</div>`;
-    chatBox.innerHTML += userMessage;
+    // Scroll to latest message
+    chatBox.scrollTop = chatBox.scrollHeight;
 
+    // Simulate bot response
     setTimeout(() => {
-        let botResponse = `<div><strong>Bot:</strong> Hello! I am your AI chatbot.</div>`;
-        chatBox.innerHTML += botResponse;
+        const botMessage = document.createElement("div");
+        botMessage.className = "message bot";
+        botMessage.textContent = "I'm here to help!";
+        chatBox.appendChild(botMessage);
+        chatBox.scrollTop = chatBox.scrollHeight;
     }, 1000);
 
-    document.getElementById("user-input").value = "";
+    // Clear input field
+    userInput.value = "";
 }
