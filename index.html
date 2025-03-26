@@ -4,56 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monisha AI</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-container {
+            width: 50%;
+            max-width: 600px;
+            background: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+        #chat-box {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #444;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background: #222;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #555;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #777;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Chat Container -->
     <div class="chat-container">
-        <div class="chat-header">Monisha AI</div>
-        <div class="chat-box" id="chat-box">
-            <!-- Chat messages will appear here -->
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="chat-input" class="chat-input" placeholder="Type your message..." />
-            <button class="send-button" onclick="sendMessage()">Send</button>
-        </div>
+        <h1>Monisha AI</h1>
+        <div id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
     </div>
 
-    <!-- JavaScript for API -->
     <script>
         async function sendMessage() {
-            let inputField = document.getElementById("chat-input");
-            let chatBox = document.getElementById("chat-box");
-            let userMessage = inputField.value.trim();
+            const userInput = document.getElementById("user-input").value;
+            if (!userInput.trim()) return;
 
-            if (userMessage !== "") {
-                // Append user message
-                chatBox.innerHTML += `<div class="message user-message">You: ${userMessage}</div>`;
-                inputField.value = ""; // Clear input
-                chatBox.scrollTop = chatBox.scrollHeight;
+            const chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+            document.getElementById("user-input").value = "";
 
-                try {
-                    // Send request to Gemini API
-                    let response = await fetch("https://your-backend-url.com/chat", { // Replace with your actual API URL
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({ message: userMessage })
-                    });
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userInput })
+            });
 
-                    let data = await response.json();
-
-                    // Append AI response
-                    chatBox.innerHTML += `<div class="message bot-message">Monisha AI: ${data.response}</div>`;
-                    chatBox.scrollTop = chatBox.scrollHeight;
-
-                } catch (error) {
-                    console.error("Error fetching response:", error);
-                    chatBox.innerHTML += `<div class="message bot-message">Monisha AI: Sorry, I couldn't process that.</div>`;
-                }
-            }
+            const data = await response.json();
+            chatBox.innerHTML += `<p><strong>Monisha AI:</strong> ${data.reply}</p>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
 
