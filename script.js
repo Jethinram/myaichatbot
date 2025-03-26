@@ -1,27 +1,25 @@
+document.getElementById("send-btn").addEventListener("click", function() {
+    sendMessage();
+});
+
+document.getElementById("user-input").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+});
+
 function sendMessage() {
-    const userInput = document.getElementById("user-input");
-    const chatBox = document.getElementById("chat-box");
-    
-    if (userInput.value.trim() === "") return;
+    let userMessage = document.getElementById("user-input").value;
+    if (userMessage.trim() === "") return;
 
-    // Add user message
-    const userMessage = document.createElement("div");
-    userMessage.className = "message user";
-    userMessage.textContent = userInput.value;
-    chatBox.appendChild(userMessage);
+    let chatOutput = document.getElementById("chat-output");
 
-    // Scroll to latest message
-    chatBox.scrollTop = chatBox.scrollHeight;
+    // Display user message
+    chatOutput.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+    document.getElementById("user-input").value = "";
 
-    // Simulate bot response
+    // Simulate Monisha AI response (replace with Gemini API)
     setTimeout(() => {
-        const botMessage = document.createElement("div");
-        botMessage.className = "message bot";
-        botMessage.textContent = "I'm here to help!";
-        chatBox.appendChild(botMessage);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }, 1000);
-
-    // Clear input field
-    userInput.value = "";
-}
+        let botReply = "Hello! I am Monisha AI. How can I assist you?";
+        chatOutput.innerHTML += `<p><strong>Monisha AI:</strong> ${botReply}</p>`;
+    }, 100
