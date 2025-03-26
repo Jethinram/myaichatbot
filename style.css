@@ -1,81 +1,74 @@
-/* Dark Theme Styling */
-body {
-    background-color: black;
+/* Make the body cover the full screen and center the content */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black; /* Full dark theme */
     color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
-
-.container {
-    margin: 100px auto;
-    width: 50%;
-}
-
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.chatbox {
-    display: flex;
-    align-items: center;
-    background-color: #1e1e1e;
-    padding: 10px;
-    border-radius: 8px;
-    margin: 20px auto;
-    width: 80%;
-    position: relative;
-}
-
-.chatbox input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    padding: 10px;
-    outline: none;
-}
-
-.chatbox button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.chatbox button img {
-    width: 20px;
-    height: 20px;
-    filter: invert(100%);
-}
-
-.buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    align-items: center;
 }
 
-.buttons button {
-    background: transparent;
-    border: 1px solid white;
+/* Chat container styling */
+.chat-container {
+    width: 60%;  /* Adjust width */
+    max-width: 800px; /* Keep it responsive */
+    height: 80vh; /* Make it cover most of the screen */
+    background-color: #121212; /* Dark gray for a modern look */
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1); /* Soft glow */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat header */
+.chat-header {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px;
+    background-color: #1e1e1e;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Chat messages area */
+.chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+/* Input area */
+.chat-input-area {
+    display: flex;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-radius: 0 0 15px 15px;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #2b2b2b;
     color: white;
+}
+
+.send-button {
     padding: 10px 15px;
-    border-radius: 20px;
+    margin-left: 10px;
+    border: none;
+    background-color: #4CAF50; /* Green send button */
+    color: white;
+    font-size: 1rem;
+    border-radius: 10px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.buttons button:hover {
-    background: white;
-    color: black;
-}
-
-.chat-output {
-    margin-top: 30px;
-    text-align: left;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+.send-button:hover {
+    background-color: #45a049;
 }
