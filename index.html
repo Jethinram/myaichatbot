@@ -4,25 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monisha AI</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
 </head>
 <body>
-    <div class="container">
-        <h1>What can I help with?</h1>
-        <div class="chatbox">
-            <input type="text" id="user-input" placeholder="Type your message...">
-            <button id="send-btn">
-                <img src="send-icon.png" alt="Send">
-            </button>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <div class="chat-header">Monisha AI</div>
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will appear here -->
         </div>
-        <div class="buttons">
-            <button>Search with Monisha AI</button>
-            <button>Talk with Monisha AI</button>
-            <button>Research</button>
-            <button>More</button>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Type your message..." />
+            <button class="send-button" onclick="sendMessage()">Send</button>
         </div>
-        <div class="chat-output" id="chat-output"></div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- JavaScript for chat functionality -->
+    <script>
+        function sendMessage() {
+            let inputField = document.getElementById("chat-input");
+            let chatBox = document.getElementById("chat-box");
+
+            if (inputField.value.trim() !== "") {
+                // Append user message
+                let userMessage = `<div class="message user-message">You: ${inputField.value}</div>`;
+                chatBox.innerHTML += userMessage;
+
+                // Simulate bot response
+                setTimeout(() => {
+                    let botMessage = `<div class="message bot-message">Monisha AI: Hello! How can I assist you?</div>`;
+                    chatBox.innerHTML += botMessage;
+                    chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to latest message
+                }, 1000);
+
+                inputField.value = ""; // Clear input
+            }
+        }
+    </script>
+
 </body>
 </html>
